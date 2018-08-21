@@ -15,5 +15,13 @@ class Config
     // Raw SQL used here to
     // speed up the development
     // and prevent leaking of database structure details
-    public static $sql = [];
+    public static $sql = '
+        SELECT * FROM table
+    ';
+
+    public static $salt = 'emmmmmmm';
+
+    public static $granted_keys = [
+        'emmmmmmm'
+    ];
 }
