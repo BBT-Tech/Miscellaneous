@@ -62,6 +62,28 @@
 
             <v-btn medium color="blue" dark @click="renewList">刷新</v-btn>
 
+            <v-layout row wrap ma-3>
+                <v-flex sm5 xs5>
+                    <v-select
+                    v-model="department"
+                    :items="deps"
+                    label="选择部门"
+                    name="department"
+                    ></v-select>
+                </v-flex>
+
+                <v-spacer></v-spacer>
+                <v-flex sm5 xs5>
+                    <v-text-field
+                    v-model="password"
+                    :type="'password'"
+                    name="password"
+                    label="密码"
+                    required
+                    ></v-text-field>
+                </v-flex>
+            </v-layout>
+
             <template>
                 <v-layout row justify-center>
                     <v-dialog v-model="dialog">
@@ -83,7 +105,8 @@
             el: '#app',
             data: {
                 search: '', name: '', introduction: '',
-                loading: false, dialog: false,
+                department: '', password: '',
+                logedin: false, loading: false, dialog: false,
                 header: [
                     { text: '姓名', value: 'name' },
                     { text: '性别', value: 'sex' },
@@ -97,26 +120,41 @@
                     { text: '个人简介', value: 'introduction' },
                     { text: '提交时间', value: 'create_time' }
                 ],
-                data: []
+                data: [],
+                deps: [
+                    '技术部',
+                    '视频部',
+                    '外联部',
+                    '节目部',
+                    '编辑部',
+                    '人力资源部',
+                    '策划推广部',
+                    '综合管理部',
+                    '视觉设计部',
+                    '综合新闻部',
+                    '产品运营部',
+                    'Deep♂Dark♂Fantasy'
+                ]
             },
+
+            created: function () {
+                this.renewList();
+            },
+
             methods: {
                 renewList: function () {
                     this.loading = true;
-                    this.data = [
-                        {
-                            name: "喵喵喵",
-                            sex: "男",
-                            college: "计算机科学与工程学院",
-                            grade: "大一",
-                            dorm: "C12-233",
-                            phone: "13333333333",
-                            first: "技术部 - 代码组",
-                            second: "技术部 - 设计组",
-                            adjust: "是",
-                            introduction: "喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵",
-                            create_time: "2018-09-11 10:59:30"
-                        }
-                    ];
+
+                    fetch('mock.json', {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        body: 'name=' + this.department + '&password=' + this.password
+                    })
+                    .then(response => response.json())
+                    .then((data) => this.handleData(data));
+
                     this.loading = false;
                 },
 
@@ -124,6 +162,14 @@
                     this.name = item.name;
                     this.introduction = item.introduction;
                     this.dialog = true;
+                },
+
+                handleData: function (data) {
+                    if (data.code == 0) {
+                        this.data = data;
+                    } else {
+                        alert('请选择');
+                    }
                 }
             }
         })
