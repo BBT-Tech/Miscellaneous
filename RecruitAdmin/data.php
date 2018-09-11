@@ -135,7 +135,12 @@
             created: function () {
                 fetch('mock-status.json', { method: 'GET' })
                 .then(response => response.json())
-                .then((res) => this.init(res));
+                .then((res) => {
+                    if (res.ojbk) {
+                        this.department = res.name;
+                        this.renewList();
+                    }
+                })
             },
 
             methods: {
@@ -147,17 +152,18 @@
                         headers: {
                             "Content-Type": "application/x-www-form-urlencoded"
                         },
-                        body: 'name=' + this.department + '&password=' + this.password
+                        body: this.password == '' ? '' :
+                            'name=' + this.department + '&password=' + this.password
                     })
                     .then(response => response.json())
-                    .then((res) => this.handleData(res));
+                    .then((res) => {
+                        if (res.code == 0)
+                            this.data = res.data;
+                        else
+                            this.showModel(res.message, true);
+                    })
 
                     this.loading = false;
-                },
-
-                handleData: function (res) {
-                    if (res.code == 0)  this.data = res.data;
-                    else this.showModel(res.message, true);
                 },
 
                 showModel: function (item, err =false) {
@@ -169,13 +175,6 @@
                         this.detail = item.introduction;
                     }
                     this.dialog = true;
-                },
-
-                init: function (res) {
-                    if (res.ojbk) {
-                        this.department = res.name;
-                        this.renewList();
-                    }
                 }
             }
         })
