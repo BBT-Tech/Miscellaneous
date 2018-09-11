@@ -42,7 +42,9 @@
                         <td>{{ props.item.first }}</td>
                         <td>{{ props.item.second }}</td>
                         <td>{{ props.item.adjust }}</td>
-                        <td>{{ props.item.introduction }}</td>
+                        <td @click="showIntro(props.item)">
+                            <a href="#">点击查看></a>
+                        </td>
                         <td>{{ props.item.create_time }}</td>
                     </template>
 
@@ -59,6 +61,17 @@
             </v-card>
 
             <v-btn medium color="blue" dark @click="renewList">刷新</v-btn>
+
+            <template>
+                <v-layout row justify-center>
+                    <v-dialog v-model="dialog">
+                        <v-card>
+                            <v-card-title class="headline">{{ name }}的个人简介</v-card-title>
+                            <v-card-text>{{ introduction }}</v-card-text>
+                        </v-card>
+                    </v-dialog>
+                </v-layout>
+            </template>
         </v-app>
     </div>
 
@@ -69,8 +82,8 @@
         new Vue({
             el: '#app',
             data: {
-                search: '',
-                loading: false,
+                search: '', name: '', introduction: '',
+                loading: false, dialog: false,
                 header: [
                     { text: '姓名', value: 'name' },
                     { text: '性别', value: 'sex' },
@@ -105,6 +118,12 @@
                         }
                     ];
                     this.loading = false;
+                },
+
+                showIntro: function (item) {
+                    this.name = item.name;
+                    this.introduction = item.introduction;
+                    this.dialog = true;
                 }
             }
         })
