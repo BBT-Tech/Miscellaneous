@@ -10,7 +10,7 @@
     <div id="app">
         <v-app>
             <center>
-                <div class="headline my-3">BBT 18 秋招 · 实时报名数据统计</div>
+                <div class="headline my-3">BBT 18 秋招 · 实时报名情况统计</div>
             </center>
 
             <v-data-table
@@ -31,12 +31,6 @@
                     <td>{{ props.item.scall }}</td>
                     <td>{{ props.item.scboy }}</td>
                     <td>{{ props.item.scgirl }}</td>
-                </template>
-
-                <template slot="no-data">
-                    <v-alert :value="true" color="error" icon="warning">
-                        唔= = 暂无报名数据
-                    </v-alert>
                 </template>
             </v-data-table>
 
