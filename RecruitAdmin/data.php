@@ -13,33 +13,50 @@
                 <div class="headline my-3">BBT 18 秋招 · 报名数据</div>
             </center>
 
-            <v-data-table
-            :headers="header"
-            :items="data"
-            :loading="loading"
-            hide-actions
-            class="elevation-1">
-                <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
-                <template slot="items" slot-scope="props">
-                    <td>{{ props.item.name }}</td>
-                    <td>{{ props.item.sex }}</td>
-                    <td>{{ props.item.college }}</td>
-                    <td>{{ props.item.grade }}</td>
-                    <td>{{ props.item.dorm }}</td>
-                    <td>{{ props.item.phone }}</td>
-                    <td>{{ props.item.first }}</td>
-                    <td>{{ props.item.second }}</td>
-                    <td>{{ props.item.adjust }}</td>
-                    <td>{{ props.item.introduction }}</td>
-                    <td>{{ props.item.create_time }}</td>
-                </template>
+            <v-card>
+                <v-card-title>
+                    <v-text-field
+                        v-model="search"
+                        append-icon="search"
+                        label="搜索内容"
+                        single-line
+                        hide-details
+                    ></v-text-field>
+                </v-card-title>
 
-                <template slot="no-data">
-                    <v-alert :value="true" color="error" icon="warning">
-                        唔= = 暂无报名数据
+                <v-data-table
+                :headers="header"
+                :items="data"
+                :search="search"
+                :loading="loading"
+                hide-actions
+                class="elevation-1">
+                    <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
+                    <template slot="items" slot-scope="props">
+                        <td>{{ props.item.name }}</td>
+                        <td>{{ props.item.sex }}</td>
+                        <td>{{ props.item.college }}</td>
+                        <td>{{ props.item.grade }}</td>
+                        <td>{{ props.item.dorm }}</td>
+                        <td>{{ props.item.phone }}</td>
+                        <td>{{ props.item.first }}</td>
+                        <td>{{ props.item.second }}</td>
+                        <td>{{ props.item.adjust }}</td>
+                        <td>{{ props.item.introduction }}</td>
+                        <td>{{ props.item.create_time }}</td>
+                    </template>
+
+                    <template slot="no-data">
+                        <v-alert :value="true" color="error" icon="warning">
+                            唔= = 暂无报名数据
+                        </v-alert>
+                    </template>
+
+                    <v-alert slot="no-results" :value="true" color="error" icon="warning">
+                        未找到 "{{ search }}" 对应的匹配项
                     </v-alert>
-                </template>
-            </v-data-table>
+                </v-data-table>
+            </v-card>
 
             <v-btn medium color="blue" dark @click="renewList">刷新</v-btn>
         </v-app>
@@ -52,7 +69,7 @@
         new Vue({
             el: '#app',
             data: {
-                collapsed: false,
+                search: '',
                 loading: false,
                 header: [
                     { text: '姓名', value: 'name' },
@@ -83,7 +100,7 @@
                             first: "技术部 - 代码组",
                             second: "技术部 - 设计组",
                             adjust: "是",
-                            introduction: "喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵",
+                            introduction: "喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵",
                             create_time: "2018-09-11 10:59:30"
                         }
                     ];
