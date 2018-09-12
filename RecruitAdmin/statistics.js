@@ -2,10 +2,10 @@ new Vue({
     el: '#app',
 
     data: {
-        collapsed: false,
+        collapsed: true,
         loading: false,
         header: [
-            { text: '名称', value: 'name' },
+            { text: '名称', value: 'n' },
             { text: '报名总人数', value: 'all' },
             { text: '男生', value: 'boy' },
             { text: '女生', value: 'girl' },
@@ -29,7 +29,7 @@ new Vue({
 
             url = 'mock-statistics.json';
             this.collapsed = !this.collapsed;
-            if (this.collapsed) url += '?c';
+            if (this.collapsed) url += '?all';
 
             fetch(url, { method: 'GET' })
             .then(response => response.json())
