@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <title>实时报名情况统计</title>
     <link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/vuetify/1.1.0-beta.0/vuetify.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 
 <body>
     <div id="app">
         <v-app>
             <center>
-                <div class="headline my-3">BBT 18 秋招 · 实时报名情况统计</div>
+                <div class="headline my-3" @click="jump">BBT 18 秋招 · 实时报名情况统计</div>
             </center>
 
             <v-data-table
@@ -48,6 +51,7 @@
     <script>
         new Vue({
             el: '#app',
+
             data: {
                 collapsed: false,
                 loading: false,
@@ -65,6 +69,7 @@
                 ],
                 data: []
             },
+
             methods: {
                 toggleDepList: function () {
                     this.collapsed = !this.collapsed;
@@ -113,6 +118,10 @@
                         ];
                     }
                     this.loading = false;
+                },
+
+                jump: function () {
+                    location.href = 'data.html';
                 }
             }
         })

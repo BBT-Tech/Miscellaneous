@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <title>报名数据</title>
     <link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/vuetify/1.1.0-beta.0/vuetify.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 
 <body>
     <div id="app">
         <v-app>
             <center>
-                <div class="headline my-3">BBT 18 秋招 · 报名数据</div>
+                <div class="headline my-3" @click="jump">BBT 18 秋招 · 报名数据</div>
             </center>
 
             <v-card>
@@ -175,6 +178,10 @@
                         this.detail = item.introduction;
                     }
                     this.dialog = true;
+                },
+
+                jump: function () {
+                    location.href = 'statistics.html';
                 }
             }
         })
