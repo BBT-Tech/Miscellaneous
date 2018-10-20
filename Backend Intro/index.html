@@ -27,7 +27,7 @@
 
                 <br>
 
-				<form id="task-form" class="form-horizontal">
+                <form id="task-form" class="form-horizontal">
 					<div class="form-group">
 						<label class="col-md-12 control-label">用户名</label>
 						<div class="col-md-12">
@@ -45,11 +45,13 @@
                     <div class="form-group d-none" id="checkpwd">
                         <label class="col-md-12 control-label">确认登录密码</label>
                         <div class="col-md-12">
-                            <input type="password" class="form-control" name="checkpwd" placeholder="请再次输入密码" required>
+                            <input type="password" class="form-control" name="checkpwd" placeholder="请再次输入密码">
                         </div>
                     </div>
-    
-					<div class="modal-footer">
+
+                    <div class="p-3 d-none" id="result-msg"></div>
+
+                    <div class="modal-footer">
 						<input type="submit" class="btn btn-lg btn-primary btn-block" value="确认">
 					</div>
 				</form>
